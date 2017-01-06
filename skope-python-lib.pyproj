@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{625d9824-1993-4ed1-8735-3463f707a4ce}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>packages\skope\raster_file_probe.py</StartupFile>
+    <StartupFile>packages\skope\raster_file.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -25,7 +25,7 @@
   <ItemGroup>
     <Compile Include="packages\.ropeproject\config.py" />
     <Compile Include="packages\skope\probe_driver.py" />
-    <Compile Include="packages\skope\raster_file_probe.py" />
+    <Compile Include="packages\skope\raster_file.py" />
     <Compile Include="packages\skope\test_raster_file_probe.py" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
 import pytest
-import raster_file_probe
+from raster_file import RasterFile
 
 filename = 'test-1x1x1-byte.tif'
 
 @pytest.fixture
 def properties():
-    return raster_file_probe.get_dataset_properties(filename)
+    return RasterFile(filename).properties
 
 def test_get_dataset_properties_filename(properties):
     assert filename == properties['filename']
