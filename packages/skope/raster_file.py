@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import optparse
+import sys
+
 from enum import Enum
 from osgeo import gdal
 from gdalconst import GA_ReadOnly
@@ -9,7 +11,7 @@ class RasterDataType(Enum): (UNKNOWN, BYTE, UINT16, INT16,
                              UINT32, INT32, FLOAT32, FLOAT64, 
                              CINT16, CINT32, CFLOAT32, CFLOAT64) = range(12)
 
-class RasterFile(object):
+class RasterFile:
 
     def __init__(self, filename=None, dataset=None):
         
@@ -17,7 +19,9 @@ class RasterFile(object):
             self.dataset = dataset
         else:
             self.dataset = gdal.Open(filename, GA_ReadOnly)
-
+            if self.dataset is None:
+                raise Exception ("Could not open raster file: " + filename)
+            
         # store given dataset properties
         self.properties = { 
             'filename': self.dataset.GetDescription(),
