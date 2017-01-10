@@ -24,7 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="packages\.ropeproject\config.py" />
-    <Compile Include="packages\skope\probe_driver.py" />
     <Compile Include="packages\skope\raster_file.py" />
     <Compile Include="packages\skope\test_raster_file_probe.py" />
   </ItemGroup>
