@@ -8,4 +8,4 @@ before_install:
   - sudo apt-get install python-gdal
   - gdalinfo --version
 
-script: pytest
+script: export PYTHONPATH=/usr/lib/python2.7/dist-packages; pytest
