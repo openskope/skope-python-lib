@@ -6,5 +6,6 @@ language: python
 before_install:
   - sudo apt-get install gdal-bin
   - sudo apt-get install python-gdal
+  - gdal_retile.py --version
 
 script: pytest
