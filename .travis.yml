@@ -4,6 +4,6 @@ dist: trusty
 language: python
 
 before_install:
-  - sudo apt-get install gdal
+  - sudo apt-get install gdal-bin
 
 script: pytest
