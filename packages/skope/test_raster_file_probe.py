@@ -1,7 +1,6 @@
 import pytest
-import sys
 
-from raster_file import RasterFile
+from skope.raster_file import RasterFile
 
 name_of_existing_file = 'test-1x1x1-byte.tif'
 name_of_nonexisting_file = 'no_such_file'

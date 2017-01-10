@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-import argparse
-import sys
+import osr
 
 from enum import Enum
 from osgeo import gdal
-import osr
 from gdalconst import GA_ReadOnly
 
 class RasterDataType(Enum): (UNKNOWN, BYTE, UINT16, INT16, 
@@ -60,20 +58,7 @@ class RasterFile:
                 RasterDataType(band.DataType) != self.data_type):
                     println("Bands 1 and " + band_index + " have different properties.")
 
-    def print_properties(self):
-        print('Format              {}'.format(self.format))
-        print('Origin (deg)        {} lng, {} lat'.format(self.origin_lng, self.origin_lat))
-        print('Pixel size (deg)    {:f} (1/{:d}) lng x {:f} (1/{:d}) lat'
-            .format(self.pixel_size_lng, self.pixels_per_degree_lng, 
-                    self.pixel_size_lat, self.pixels_per_degree_lat))
-        print('Raster extent (deg) {:f} lng x {:f} lat'
-            .format(self.extent_in_degrees_lng, self.extent_in_degrees_lat))
-        print('Raster extent (px)  {} x {} '
-            .format(self.extent_in_pixels_lng, self.extent_in_pixels_lat))
-        print('Number of bands     {}'.format(self.band_count))
-        print('Block size          {} x {}'.format(self.block_size_x, self.block_size_y))
-        print('No-data value       {}'.format(self.no_data_value))
-        print('Pixel data type     {}'.format(self.data_type_name))
+
 
     #    min = band.GetMinimum()
     #    max = band.GetMaximum()
@@ -88,37 +73,3 @@ class RasterFile:
         # print(len(band_data))
 
         # band = self.dataset.GetRasterBand(2000)
-
-def create(filename, format='GTiff', origin=(0,0), pixel_size=(1.0, 1.0),
-    extent_in_pixels=(1,1), band_count=1, data_type=RasterDataType.BYTE, nodata_value=None) -> RasterFile:
-
-    origin_lng, origin_lat = origin
-    pixel_size_lng, pixel_size_lat = pixel_size
-    extent_in_pixels_lng, extent_in_pixels_lat = extent_in_pixels
-
-    driver = gdal.GetDriverByName(format)
-    dataset = driver.Create(filename, extent_in_pixels_lng, extent_in_pixels_lat, band_count, data_type.value)
-    dataset.SetGeoTransform([origin_lng, pixel_size_lng, 0, origin_lat, 0, -pixel_size_lat])
-    srs = osr.SpatialReference()
-    srs.SetUTM(11, 1)
-    srs.SetWellKnownGeogCS('NAD27')
-    dataset.SetProjection(srs.ExportToWkt())
-    return RasterFile(dataset=dataset)
-
-if __name__ == '__main__':
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument('command', help='operation to perform')
-    parser.add_argument('filename', help='file to operate on')
-    args = parser.parse_args()
-
-    if args.command == 'create':
-        create(
-            args.filename,
-            pixel_size=(0.0083333,0.0083333),
-            extent_in_pixels=(12,12),
-            origin=(-114.0, 43.0)
-        )
-    elif args.command == 'probe':
-        dataset = RasterFile(args.filename)
-        dataset.print_properties()
