@@ -56,7 +56,7 @@ class RasterFile:
                 band.GetBlockSize()[1] != self.block_size_y or
                 band.GetNoDataValue() != self.no_data_value or
                 RasterDataType(band.DataType) != self.data_type):
-                    println("Bands 1 and " + band_index + " have different properties.")
+                    print('Bands 1 and {} have different properties.'.format(band_index))
 
 
 
