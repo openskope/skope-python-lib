@@ -1,5 +1,5 @@
-sudo: required
 dist: trusty
+sudo: required
 
 language: python
 
@@ -8,4 +8,13 @@ before_install:
   - sudo apt-get install python-gdal
   - gdalinfo --version
 
-script: export PYTHONPATH=/usr/lib/python2.7/dist-packages; pytest
+before_install:
+  - sudo add-apt-repository ppa:ubuntugis/ppa -y
+  - sudo apt-get update -q
+
+apt_packages:
+  - gdal-bin
+  - libgdal-dev
+  - python-gdal
+
+script: pytest
