@@ -17,6 +17,6 @@ python:
   - "2.7"
  
 env:
-  PYTHONPATH=/usr/lib/python2.7/dist-packages
+  - PYTHONPATH=/usr/lib/python2.7/dist-packages
 
 script: pytest
