@@ -4,17 +4,13 @@ sudo: required
 language: python
 
 before_install:
-  - sudo apt-get install gdal-bin
-  - sudo apt-get install python-gdal
   - gdalinfo --version
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ppa -y
   - sudo apt-get update -q
-
-apt_packages:
-  - gdal-bin
-  - libgdal-dev
-  - python-gdal
+  - sudo apt-get install gdal-bin
+  - sudo apt-get install libgdal-dev
+  - sudo apt-get install python-gdal
 
 script: pytest
